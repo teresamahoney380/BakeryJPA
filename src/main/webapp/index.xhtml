@@ -5,15 +5,16 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core" 
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Bakery JPA</title>
         <h:outputStylesheet name="css/jsfcrud.css"/>
     </h:head>
     <h:body>
-        Hello from Facelets
-        <br />
-        <h:link outcome="/menu/List" value="Show All Menu Items"/>
-        <br />
-        <h:link outcome="/menu/Menu" value="Menu Selection"/>
+        <h:form>
+            <p:menu>
+                <p:menuitem value="Menu Selection" url="/menu/Menu.xhtml"/>
+        
+            </p:menu>
+        </h:form>
     </h:body>
 
 </html>
