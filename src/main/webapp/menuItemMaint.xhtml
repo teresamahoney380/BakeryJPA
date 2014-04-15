@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" 
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Menu Item Maint</title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+    </h:head>
+    <h:body>
+        <h1>Menu Item Database Maintenance</h1>
+        <h:form id="editForm">
+            <p:growl id="messages" showDetail="true"/>
+
+            <p:dataTable var = "menu" value="#{menuBean.menuItems}" rowKey="#{menu.menuId}" 
+                         id="menuTable"
+                         selection="#{menuBean.singleMenu}"
+                         selectionMode ="single" editable="true"
+                         >
+                <p:ajax event="rowEdit" listener="#{menuBean.onEdit}" update=":editForm:messages :editForm:menuTable" />  
+                <p:ajax event="rowEditCancel" listener="#{menuBean.onCancel}" update=":editForm:messages" />
+                <p:column headerText="ID" id="idNum" >#{menu.menuId}                  
+
+                </p:column>
+                <p:column headerText="Desc" id="itemDesc">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{menu.menuItem}" />
+                        </f:facet>
+                        <f:facet name="input">
+                            <h:inputText value="#{menu.menuItem}" />
+                        </f:facet>
+                    </p:cellEditor>   
+                </p:column>
+                <p:column headerText="Price" id="price">#{menu.itemPrice}</p:column>
+                <p:column headerText="Image"  id="itemImgUrl" >#{menu.itemImgUrl}</p:column>
+                <p:column>
+                    <p:rowEditor />
+                </p:column>
+
+
+            </p:dataTable>
+
+        </h:form>
+    </h:body>
+</html>
+

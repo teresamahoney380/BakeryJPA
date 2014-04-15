@@ -9,11 +9,27 @@
         <h:outputStylesheet name="css/jsfcrud.css"/>
     </h:head>
     <h:body>
+        <h1>Cupcake Bakery</h1>
+
+        <p:graphicImage value="resources/images/cupcakes.jpg" alt="Colorful cupcakes"/>
         <h:form>
             <p:menu>
-                <p:menuitem value="Menu Selection" url="/menu/Menu.xhtml"/>
-        
+                <p:menuitem value="Menu Selection" url="faces/menuItemMaint.xhtml"/>
+                <p:menuitem value="Order Summary" url="faces/ordersummary.xhtml"/>
             </p:menu>
+        </h:form>
+        <h:form id="form1">
+            <p:commandButton id="submitOrder" value="Place Order" action="#{menuBean.processOrder()}"/>
+            <p:dataTable var = "menu" value="#{menuBean.menuItems}" rowKey="#{menu.menuId}" id="menuTable"
+                         selection="#{menuBean.selectedItems}">
+                <p:column selectionMode="multiple"/>
+                <p:column headerText="ID" id="idNum" >#{menu.menuId}</p:column>
+                <p:column headerText="Desc" id="itemDesc">#{menu.menuItem}</p:column>
+                <p:column headerText="Price" id="price">#{menu.itemPrice}</p:column>
+                <p:column headerText="Image"  id="itemImgUrl" ><p:graphicImage value="/resources/#{menu.itemImgUrl}" alt="Cupcake Image"></p:graphicImage> </p:column>
+
+            </p:dataTable>
+            <p:commandButton id="submitOrder2" value="Place Order" action="#{menuBean.processOrder()}"/>
         </h:form>
     </h:body>
 

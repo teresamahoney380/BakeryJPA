@@ -10,17 +10,18 @@
         <h:outputStylesheet name="css/jsfcrud.css"/>
     </h:head>
     <h:body>
+        <h1>The new Bakery</h1>
          <h:form id="form">
              <p:dataTable var="menu" value="#{menuBean.menuItems}" rowKey="#{menu.menuId}"  paginator="true" rows="25"
-                          selection="#{menuBean.selectedItems}"   id="menuTable">
+                             id="menuTable">
                 
                 <f:facet name="header">
                     Today's Cupcake Selection
                 </f:facet>
                <!--  <p:column selectionMode='Multiple'/>-->
-                 <p:column headerText="Flavor" sortBy="menuItem" filterBy="meniItem" id="menuItem">#{menu.menuItem}</p:column>
+               <p:column headerText="Flavor" sortBy="menuItem" filterBy="menuItem" id="menuItem"><p:outputLabel value="#{menu.menuItem}"/></p:column>
                  <p:column headerText="Price" sortBy="itemPrice" filterBy="itemPrice" id="itemPrice" style="text-align:center;">#{menu.itemPrice}</p:column>
-                 <p:column headerText="Image"  id="itemImgUrl" ><p:graphicImage name='#{menu.itemImgUrl}'/> </p:column>
+                 <p:column headerText="Image"  id="itemImgUrl" >#{menu.itemImgUrl} </p:column>
                 
                
             </p:dataTable>

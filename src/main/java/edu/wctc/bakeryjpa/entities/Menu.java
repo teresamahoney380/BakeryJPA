@@ -8,6 +8,7 @@ package edu.wctc.bakeryjpa.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,9 +17,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -34,6 +37,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Menu.findByItemPrice", query = "SELECT m FROM Menu m WHERE m.itemPrice = :itemPrice"),
     @NamedQuery(name = "Menu.findByItemImgUrl", query = "SELECT m FROM Menu m WHERE m.itemImgUrl = :itemImgUrl")})
 public class Menu implements Serializable {
+    @OneToMany(mappedBy = "menuId")
+    private Collection<OrderDetail> orderDetailCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,6 +57,15 @@ public class Menu implements Serializable {
 
     public Menu() {
     }
+    
+
+    public Menu(Integer menuId, String menuItem, BigDecimal itemPrice, String itemImgUrl) {
+        this.menuId = menuId;
+        this.menuItem = menuItem;
+        this.itemPrice = itemPrice;
+        this.itemImgUrl = itemImgUrl;
+    }
+    
 
     public Menu(Integer menuId) {
         this.menuId = menuId;
@@ -112,6 +126,15 @@ public class Menu implements Serializable {
     @Override
     public String toString() {
         return "edu.wctc.bakeryjpa.entities.Menu[ menuId=" + menuId + " ]";
+    }
+
+    @XmlTransient
+    public Collection<OrderDetail> getOrderDetailCollection() {
+        return orderDetailCollection;
+    }
+
+    public void setOrderDetailCollection(Collection<OrderDetail> orderDetailCollection) {
+        this.orderDetailCollection = orderDetailCollection;
     }
     
 }
